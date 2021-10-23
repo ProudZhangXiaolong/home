@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>教师活动记录</title>
+    <link rel="stylesheet" href="{% static 'layui-v2.6.8/layui/css/layui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/teacher_activity_info.css' %}"/>
+    <script src="{% static 'layui-v2.6.8/layui/layui.js' %}"></script>
+    <style>
+        /*对layui中的样式进行重写*/
+        .layui-tab-content {
+            padding: 0;
+            /*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+        }
+
+        .show-frame {
+            top: 50px !important;
+            /*默认.layui-layout-admin .layui-body {
+            top: 60px;
+            bottom: 44px;
+        }*/
+            overflow: hidden;
+            /*消除浏览器最右边的滚动条*/
+        }
+
+        .frame {
+            position: absolute;
+            padding: 10px;
+            /*与layui-footer隔开一段距离*/
+            width: 100%;
+            height: 100%;
+        }
+
+        .head {
+            width: 1280px;
+            height: 60px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-layout layui-layout-admin">
+    <!-- 导航栏 -->
+    <div class="layui-header head">
+        <div class="layui-logo">智慧学工管理平台</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item "><a href="{% url 'user:teacher' number %}">首页</a></li>
+            <li class="layui-nav-item"><a href="{% url 'user:t_scanf' number %}">查看个人信息</a></li>
+            <li class="layui-nav-item"><a href="{% url 'user:t_change' number %}">更改个人信息</a></li>
+            <li class="layui-nav-item"><a href="{% url 'user:t_login' number %}">上传活动</a></li>
+            <li class="layui-nav-item"><a href="{% url 'user:t_scanf_active' number %}">活动记录</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">暂无功能</a></dd>
+                    <dd><a href="">暂无功能</a></dd>
+                    <dd><a href="">暂无功能</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="/logout">退出登录<span class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"><img src="{% static 'img/yonghu.png' %}"
+                                            class="layui-nav-img">欢迎用户&nbsp;{{ number }}</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="wrapper">
+        {% for ac in activity %}
+            <div class="container">
+                <div class="box">
+                    <div class="left" style="background-image: url('/media/{{ ac.image }}')"></div>
+                    <div class="right">
+                        <div class="title">
+                            活动类型：{{ ac.type }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            活动主题：{{ ac.title }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            活动对象：{{ ac.people }}
+                        </div>
+                        <div class="content">
+                            {{ ac.content }}
+                        </div>
+                        <div class="bottom">发布者：
+                            <span class="name">{{ teacher.name }}</span>
+                            <a href="{% url 'user:t_delete_active' number ac.id%}" style="float: right;margin-left: 20px;color:#6C757D;">删除</a>
+                            <span class="time">{{ ac.created_time }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+    <!-- 尾部 -->
+    <div class="foot">
+        新疆农业大学计算机与信息工程学院
+    </div>
+</div>
+</body>
+</html>

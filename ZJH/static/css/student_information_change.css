@@ -1,0 +1,25 @@
+.content{
+	width: 1280px;
+	height: 680px;
+	background-color: #F5F5F5;
+	margin: 0 auto;
+	margin-top: 60px;
+	padding-top: 40px;
+}
+.foot{
+	width:1280px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 auto;
+	color: #BDBEC1;
+	font-size: small;
+	background-color: #23262E;
+}
+.font1{
+	font-size: 16px;
+	font-weight: 600;
+}
+.font2{
+	font-size: 14px;
+}

@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生个人信息查看</title>
+    <link rel="stylesheet" href="{% static 'layui-v2.6.8/layui/css/layui.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/student_information.css'%}"/>
+    <script src="{% static 'layui-v2.6.8/layui/layui.js'%}"></script>
+    <style>
+        /*对layui中的样式进行重写*/
+        .layui-tab-content {
+            padding: 0;/*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+        }
+        .show-frame {
+            top: 50px!important;
+            /*默认.layui-layout-admin .layui-body {
+                top: 60px;
+                bottom: 44px;
+            }*/
+            overflow: hidden;/*消除浏览器最右边的滚动条*/
+        }
+        .frame {
+            position: absolute;
+            padding: 10px;/*与layui-footer隔开一段距离*/
+            width: 100%;
+            height: 100%;
+        }
+		.head{
+			width: 1280px;
+			height: 60px;
+			margin: 0 auto;
+		}
+    </style>
+</head>
+
+<body>
+	
+	<div class="layui-layout layui-layout-admin">
+		<!-- 导航栏 -->
+		<div class="layui-header head">
+			<div class="layui-logo">智慧学工管理平台</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item "><a href="{% url 'user:student' number %}">首页</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:scanf' number %}">查看个人信息</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:change' number%}">更改个人信息</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="/logout">退出登录<span class="layui-badge-dot"></span></a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;"><img src="{% static 'img/yonghu.png'%}"  class="layui-nav-img">欢迎用户&nbsp;{{ number }}</a>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="content">
+			<table border="3" width="800" height="600" align="center" bgcolor="#F1F3F4">
+				<tr class="font1">
+					<td colspan="6" align="center">个人信息</td>
+				</tr>
+				<tr align="center">
+					<td class="font1">姓名</td>
+					<td>{{ student_login.name }}</td>
+					<td class="font1">性别</td>
+					<td>{{student_login.sex}}</td>
+					<td class="font1">民族</td>
+					<td>{{student_login.person}}</td>
+				</tr>
+				<tr align="center">
+					<td class="font1">学号</td>
+					<td>{{student_login.number }}</td>
+					<td class="font1">密码</td>
+					<td>{{student_login.password }}</td>
+					<td class="font1">职务</td>
+					<td>{{student_login.job }}</td>
+				</tr>
+				<tr align="center">
+					<td class="font1">学院</td>
+					<td>{{ student_login.colleage}}</td>
+					<td class="font1">班级</td>
+					<td>{{ student_login.study_class }}</td>
+					<td class="font1">年龄</td>
+					<td>{{ student_login.age }}</td>
+				</tr>
+                <tr align="center">
+					<td class="font1">电话</td>
+					<td colspan="5">{{ student_login.telephone }}</td>
+				</tr>
+				<tr align="center">
+					<td class="font1">家庭住址</td>
+					<td colspan="5">{{ student_login.location }}</td>
+				</tr>
+				<tr align="center">
+					<td class="font1">自我评价</td>
+					<td colspan="5">{{ student_login.describe}}</td>
+				</tr>
+				<tr align="center">
+					<td colspan="3" class="font1">创建时间</td>
+					<td colspan="3">{{ student_login.created_time}}</td>
+				</tr>
+				<tr align="center">
+					<td colspan="3" class="font1">更新时间</td>
+					<td colspan="3">{{student_login.updated_time}}</td>
+				</tr>
+				<tr align="center">
+					<td colspan="3" class="font1">联系教师</td>
+					<td colspan="3">{{ student_login.link_teacher.name }}</td>
+				</tr>
+				<tr align="center">
+					<td colspan="3" class="font1">教师电话</td>
+					<td colspan="3">{{ student_login.link_teacher.telephone}}</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 尾部 -->
+		<div class="foot">
+			新疆农业大学计算机与信息工程学院
+		</div>
+	</div>
+
+</body>
+</html>

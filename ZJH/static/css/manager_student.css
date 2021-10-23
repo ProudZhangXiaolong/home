@@ -1,0 +1,69 @@
+.content {
+	width: 1280px;
+	background-color: #EEEEEE;
+	margin: 0 auto;
+	margin-top: 60px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.foot {
+	width: 1280px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 auto;
+	color: #BDBEC1;
+	font-size: small;
+	background-color: #23262E;
+}
+
+.content_ifo {
+	width: 1000px;
+	height: 1000px;
+	background-color: #009F95;
+	margin: 0 auto;
+}
+
+.container {
+	height: 700px;
+	width: 1000px;
+	-webkit-box-shadow: 0px 0px 10px -2px rgb(158 158 158);
+	box-shadow: 0px 0px 10px -2px rgb(158 158 158 );
+	margin: 0 auto;
+	background-color: #F1F3F4;
+	padding-top: 40px;
+}
+
+.container input[name="姓名"] {
+	width: 100px;
+}
+
+.container input[name="学号"] {
+	width: 100px;
+}
+form{
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+
+form input[type="text"]{
+	margin-right:40px;
+	height: 25px;
+}
+form span{
+	font-size: 18px;
+	font-weight: 600;
+}
+form input[type="submit"]{
+	width: 50px;
+	height: 30px;
+	margin-left: 10px;
+	margin-right: 80px;
+}
+.change{
+	width: 900px;
+	margin: 0 auto;
+	margin-top: 30px;
+}

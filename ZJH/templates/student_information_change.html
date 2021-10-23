@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生个人信息更改</title>
+       <link rel="stylesheet" href="{% static 'layui-v2.6.8/layui/css/layui.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/student_information_change.css'%}"/>
+    <script src="{% static 'layui-v2.6.8/layui/layui.js'%}"></script>
+    <style>
+        /*对layui中的样式进行重写*/
+        .layui-tab-content {
+            padding: 0;/*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+        }
+        .show-frame {
+            top: 50px!important;
+            /*默认.layui-layout-admin .layui-body {
+                top: 60px;
+                bottom: 44px;
+            }*/
+            overflow: hidden;/*消除浏览器最右边的滚动条*/
+        }
+        .frame {
+            position: absolute;
+            padding: 10px;/*与layui-footer隔开一段距离*/
+            width: 100%;
+            height: 100%;
+        }
+		.head{
+			width: 1280px;
+			height: 60px;
+			margin: 0 auto;
+		}
+    </style>
+</head>
+
+<body>
+	
+	<div class="layui-layout layui-layout-admin">
+		<!-- 导航栏 -->
+		<div class="layui-header head">
+			<div class="layui-logo">智慧学工管理平台</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item "><a href="{% url 'user:student' number %}">首页</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:scanf' number%}">查看个人信息</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:change' number%}">更改个人信息</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="/logout">退出登录<span class="layui-badge-dot"></span></a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;"><img src="{% static 'img/yonghu.png'%}" class="layui-nav-img">欢迎用户&nbsp;{{number}}</a>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="content">
+             <form action="/user/student/{{ student_change.number }}/change_information" method="post">
+                <table border="3" width="800" height="600" align="center" bgcolor="#F1F3F4">
+                    <tr class="font1">
+                        <td colspan="6" align="center">更改个人信息</td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">姓名</td>
+                        <td><input type="text" name="name" value="{{ student_change.name }}" style="width: 160px; height: 25px; text-align: center;"/></td>
+                        <td class="font1">&nbsp;&nbsp;&nbsp;&nbsp;性别&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text" name="sex" value="{{ student_change.sex }}" style="width: 160px;height: 25px; text-align: center;"/></td>
+                        <td class="font1">&nbsp;&nbsp;&nbsp;&nbsp;民族&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text" name="person" value="{{ student_change.person }}" style="width: 160px;height: 25px; text-align: center;" /></td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">学号</td>
+                        <td><input type="text" name="number" value="{{ student_change.number }}" disabled="disabled" style="width: 160px;height: 25px; text-align: center;"/></td>
+                        <td class="font1">密码</td>
+                        <td><input type="text" name="password" value="{{ student_change.password }}"  disabled="disabled" style="width: 160px;height: 25px; text-align: center;"/></td>
+                        <td class="font1">职务</td>
+                        <td><input type="text" name="job" value="{{ student_change.job }}" disabled="disabled"   style="width: 160px;height: 25px; text-align: center;"/></td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">学院</td>
+                        <td><input type="text" name="colleage" value="{{ student_change.colleage }}" style="width: 160px;height: 25px; text-align: center;" /></td>
+                        <td class="font1">班级</td>
+                        <td><input type="text" name="study_class" value="{{ student_change.study_class }}"  style="width: 160px;height: 25px; text-align: center;"/></td>
+                        <td class="font1">年龄</td>
+                        <td><input type="text" name="age" value="{{ student_change.age }}"  style="width: 160px;height: 25px; text-align: center;"/></td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">电话</td>
+                        <td colspan="5"><input type="text" name="telephone" value="{{ student_change.telephone }}" style="height: 30px; width:600px;text-align: center;" /></td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td colspan="5"><input type="text" name="location" value="{{ student_change.location }}" style="height: 30px; width:600px;text-align: center;" /></td>
+                    </tr>
+                    <tr align="center">
+                        <td class="font1">自我评价</td>
+                        <td colspan="5"><input type="text" name="describe" value="{{ student_change.describe }}" style="height: 30px; width:600px;text-align: center;" /></td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="3" class="font1">联系教师</td>
+                        <td colspan="3">
+                            <select lay-verify=""  style="height: 30px; width:100px;" name="link_teacher" >
+                                {% for teacher in all_teacher %}
+                                    <option>{{ teacher.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="font1">
+                        <td colspan="6" align="center">
+                            <input type="submit" name="submit" value="提交" style="height: 40px; width:100px;border:2px solid;"/>
+                        </td>
+                    </tr>
+                </table>
+             </form>
+		</div>
+
+		<!-- 尾部 -->
+		<div class="foot">
+			新疆农业大学计算机与信息工程学院
+		</div>
+	</div>
+
+</body>
+</html>

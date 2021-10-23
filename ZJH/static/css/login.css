@@ -1,0 +1,56 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.clearfix::before{
+	display:table ;
+	clear: both;
+	content: " ";
+}
+.sign_background{
+	width:1280px;
+	height: 500px;
+	background-image: url(../img/sign.png);
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.foot{
+	width:1280px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 auto;
+	font-size: small;
+}
+#form{
+	width: 220px;
+	height: 250px;
+	background-color: rgba(255,255,255,0.5);
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 125px;
+	padding-top: 20px;
+}
+input{
+	padding: 5px;
+	margin-top: 20px;
+}
+h5{
+	color: #093154;
+}
+input[type='radio']{
+	width:12px;
+    height:12px;
+}
+span{
+	font-size: 14px;
+	margin-right: 10px;
+}
+.choose_job{
+	margin-bottom: 10px;
+}
+a{
+	text-decoration: none;
+	font-size: small;
+}

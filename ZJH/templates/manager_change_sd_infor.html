@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>更改学生信息</title>
+		<link rel="stylesheet" href="{% static 'layui-v2.6.8/layui/css/layui.css'%}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/manager_change_sd_infor.css'%}" />
+		<script src="{% static 'layui-v2.6.8/layui/layui.js'%}"></script>
+		<style>
+			/*对layui中的样式进行重写*/
+			.layui-tab-content {
+				padding: 0;
+				/*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+			}
+
+			.show-frame {
+				top: 50px !important;
+				/*默认.layui-layout-admin .layui-body {
+                top: 60px;
+                bottom: 44px;
+            }*/
+				overflow: hidden;
+				/*消除浏览器最右边的滚动条*/
+			}
+
+			.frame {
+				position: absolute;
+				padding: 10px;
+				/*与layui-footer隔开一段距离*/
+				width: 100%;
+				height: 100%;
+			}
+
+			.head {
+				width: 1280px;
+				height: 60px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 导航栏 -->
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header head">
+				<div class="layui-logo">智慧学工管理平台</div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
+				<ul class="layui-nav layui-layout-left">
+					<li class="layui-nav-item "><a href="{% url 'user:manager' number %}">首页</a></li>
+					<li class="layui-nav-item"><a href="{% url 'user:m_student' number %}">学生信息</a></li>
+					<li class="layui-nav-item"><a href="{%  url 'user:m_teacher' number %}">教师信息</a></li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">下载</a>
+						<dl class="layui-nav-child">
+							<dd><a href="{% url 'user:m_sd_download' number %}">学生信息</a></dd>
+							<dd><a href="{% url 'user:m_th_download' number %}">教师信息</a></dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="/logout">退出登录<span class="layui-badge-dot"></span></a>
+					</li>
+					<li class="layui-nav-item" lay-unselect="">
+						<a href="javascript:;"><img src="{% static 'img/yonghu.png' %}" class="layui-nav-img">欢迎用户&nbsp;{{ number }}</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 中间内容 -->
+			<div class="content">
+				<div class="container layui-form">
+					<form action="/user/manager/{{ manager.number }}/change_student_information/{{ student.id }}" method="post" >
+						<div class="layui-form-item">
+							<label class="layui-form-label">姓名</label>
+							<div class="layui-input-block">
+								<input type="text" name="name" required lay-verify="required" value="{{ student.name }}" disabled="disabled"
+									autocomplete="off" class="layui-input" style="width: 200px;">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">学号</label>
+							<div class="layui-input-block">
+								<input type="text" name="number" required lay-verify="required" value="{{ student.number }}" disabled="disabled"
+									autocomplete="off" class="layui-input" style="width: 200px;">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">性别</label>
+							<div class="layui-input-block">
+								<input type="text" name="sex" required lay-verify="required" value="{{ student.sex }}" disabled="disabled"
+									autocomplete="off" class="layui-input" style="width: 200px;">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">电话</label>
+							<div class="layui-input-block">
+								<input type="text" name="telephone" required lay-verify="required" value="{{ student.telephone }}"
+									autocomplete="off" class="layui-input" style="width: 200px;">
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="layui-form-label">关联教师</label>
+							<div class="layui-input-block" style="width: 200px;">
+								 <select lay-verify=""  style="height: 30px; width:100px;" name="link_teacher">
+                                         <option> </option>
+                                     {% for teacher in all_teachers %}
+                                         <option>{{ teacher.name }}</option>
+                                     {% endfor %}
+                                 </select>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button type="submit" name="submit" class="layui-btn" lay-submit lay-filter="formDemo"
+									style="margin-top: 30px;margin-right: 30px;">立即提交</button>
+								<button type="reset" name="reset" class="layui-btn layui-btn-primary"
+									style="margin-top: 30px;">重置</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<!-- 尾部 -->
+			<div class="foot">
+				新疆农业大学计算机与信息工程学院
+			</div>
+		</div>
+
+
+		<script src="{% static 'layui-v2.6.8/layui/layui.js' %}"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['element,form'], function() {
+				var element = layui.element;
+				var $ = layui.$;
+				$("[name=t1]").click(function() {
+					var id = $(this).attr("id");
+					var content = $(this).attr("content");
+					if ($("li[lay-id=" + id + "]").length == 0) {
+						element.tabAdd("empTab", {
+							title: $(this).attr("title"),
+							content: "<iframe src='" + content +
+								"' class='frame' frameborder='0'></iframe>",
+							id: id
+						})
+					}
+					element.tabChange('empTab', id)
+				})
+			});
+
+			layui.use('carousel', function() {
+				var carousel = layui.carousel;
+				//建造实例
+				carousel.render({
+					elem: '#test1',
+					width: '1080px' //设置容器宽度
+						,
+					height: '500px' //设置容器高度
+						,
+					arrow: 'always' //始终显示箭头
+						,
+					anim: 'default' //切换动画方式
+						,
+					interval: '2800' //切换时间
+				});
+			});
+		</script>
+	</body>
+
+</html>

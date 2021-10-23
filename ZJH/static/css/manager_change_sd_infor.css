@@ -1,0 +1,30 @@
+.content {
+	width: 1280px;
+	height: 600px;
+	background-color: #EEEEEE;
+	margin: 0 auto;
+	margin-top: 60px;
+	padding-top: 40px;
+}
+
+.foot {
+	width: 1280px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	margin: 0 auto;
+	color: #BDBEC1;
+	font-size: small;
+	background-color: #23262E;
+}
+
+.container {
+	height: 500px;
+	width: 1000px;
+	-webkit-box-shadow: 0px 0px 10px -2px rgb(158 158 158);
+	box-shadow: 0px 0px 10px -2px rgb(158 158 158 );
+	margin: 0 auto;
+	background-color: #F1F3F4;
+	padding-top: 40px;
+}
+

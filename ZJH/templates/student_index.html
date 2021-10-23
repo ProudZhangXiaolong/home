@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三进两联一交友学生首页</title>
+    <link rel="stylesheet" href="{% static 'layui-v2.6.8/layui/css/layui.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/student_index.css'%}"/>
+    <script src="{% static 'layui-v2.6.8/layui/layui.js'%}"></script>
+    <style>
+        /*对layui中的样式进行重写*/
+        .layui-tab-content {
+            padding: 0;/*layui-tab-content:默认有padding: 10px;的值，因为iframe的绝对定位脱离文档流，所以会存在20px的空白空间*/
+        }
+        .show-frame {
+            top: 50px!important;
+            /*默认.layui-layout-admin .layui-body {
+                top: 60px;
+                bottom: 44px;
+            }*/
+            overflow: hidden;/*消除浏览器最右边的滚动条*/
+        }
+        .frame {
+            position: absolute;
+            padding: 10px;/*与layui-footer隔开一段距离*/
+            width: 100%;
+            height: 100%;
+        }
+		.head{
+			width: 1280px;
+			height: 60px;
+			margin: 0 auto;
+		}
+    </style>
+</head>
+
+<body>
+	<!-- 导航栏 -->
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header head">
+			<div class="layui-logo">智慧学工管理平台</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item "><a href="{% url 'user:student' number %}">首页</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:scanf' number %}">查看个人信息</a></li>
+				<li class="layui-nav-item"><a href="{% url 'user:change' number%}">更改个人信息</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+						<dd><a href="">暂无功能</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href='/logout'>退出登录<span class="layui-badge-dot"></span></a>
+				</li>
+				<li class="layui-nav-item" lay-unselect="">
+					<a href="javascript:;"><img src="{% static 'img/yonghu.png' %}" class="layui-nav-img">欢迎用户&nbsp;{{ number }}</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 中间内容 -->
+		<div class="content">
+			
+			<div class="part1">
+				<div class="lf"><img src="{% static 'img/tuce.png' %}" ><span>精&nbsp;彩&nbsp;瞬&nbsp;间</span></div>
+				<div class="layui-carousel rg" id="test1">
+					<div carousel-item>
+						<div><img src="{% static 'img/student_index01.png' %}" ></div>
+						<div><img src="{% static 'img/student_index02.png' %}" ></div>
+						<div><img src="{% static 'img/student_index03.png' %}" ></div>
+						<div><img src="{% static 'img/student_index04.png' %}" ></div>
+						<div><img src="{% static 'img/student_index05.png' %}" ></div>
+						<div><img src="{% static 'img/student_index06.png' %}" ></div>
+						<div><img src="{% static 'img/student_index07.png' %}" ></div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="part2">
+				<div class="left"><img src="{% static 'img/jishiben%20.png' %}" ><span>创&nbsp;新&nbsp;理&nbsp;念</span></div>
+				
+				<div class="right">
+					<div class="part2_content1">
+						<div class="lay_left">【三进】</div>
+						<div class="layui-col-md6 in_block change">
+							<div class="layui-panel">
+								<div class="ds">进宿舍 进教室 进食堂 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校展开“三进两联一交友”活动，旨在深入贯彻落实中央治疆方略、社会稳定和长治久安总目标，不断增强高校
+								学生思想政治教育工作针对性、实效性。</div>
+							</div>   
+						</div>
+					</div>
+				
+					<div class="part2_content1">
+						<div class="lay_left">【两联】</div>
+						<div class="layui-col-md6 in_block change">
+							<div class="layui-panel">
+								<div class="ds">联系学生 联系家长<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“三进两联一交友”活动开展，标志着今后我校将进一步构建“全员育人、全方位育人、全过程育人”的教育格局。“三进两联一交友”活动是做好学生思想政治教育
+								工作的有效手段，也是促进各民族师生交往交流交融的重要载体。</div>
+							</div>   
+						</div>
+					</div>
+					
+					<div class="part2_content1">
+						<div class="lay_left">【一交友】</div>
+						<div class="layui-col-md6 in_block change">
+							<div class="layui-panel">
+								<div class="ds">与学生交朋友<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全校干部教师将积极行动起来，把学校建成为反渗透的坚强阵地、民族团结的模范单位，为实现自治区社会稳定和长治久安做出积极贡献，共创新疆民族团结。</div>
+							</div>   
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 尾部 -->
+		<div class="foot">
+			新疆农业大学计算机与信息工程学院
+		</div>
+   </div>
+
+
+	<script src="{% static 'layui-v2.6.8/layui/layui.js' %}"></script>
+	<script>
+		//JavaScript代码区域
+		layui.use('element', function(){
+			var element = layui.element;
+			var $ = layui.$;
+			$("[name=t1]").click(function () {
+				var id = $(this).attr("id");
+				var content = $(this).attr("content");
+				if($("li[lay-id="+id+"]").length==0){
+					element.tabAdd("empTab",{
+						title:$(this).attr("title"),
+						content:"<iframe src='"+content+"' class='frame' frameborder='0'></iframe>",
+						id:id
+					})
+				}
+				element.tabChange('empTab',id)
+			})
+		});
+		
+		layui.use('carousel', function(){
+		  var carousel = layui.carousel;
+		  //建造实例
+		  carousel.render({
+		    elem: '#test1'
+		    ,width: '1080px' //设置容器宽度
+			,height:'500px'//设置容器高度
+		    ,arrow: 'always' //始终显示箭头
+		    ,anim: 'default' //切换动画方式
+			,interval:'2400'//切换时间
+		  });
+		});
+	</script>
+</body>
+
+</html>
